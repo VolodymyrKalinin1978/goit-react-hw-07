@@ -2,11 +2,12 @@ import { useId } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContainerSearch, Input, Label } from './SearchBox.styled';
 import { updateFilter } from '../../redux/filtersSlice';
+import { selectSearchFilter } from '../../redux/selectors';
 
 const SearchBox = () => {
   const searchId = useId();
   const dispatch = useDispatch();
-  const searchFilter = useSelector(state => state.filters.name);
+  const searchFilter = useSelector(selectSearchFilter);
 
   const handleChange = e => {
     const { value } = e.target;

@@ -1,13 +1,10 @@
 import { useId } from 'react';
-
-import { nanoid } from '@reduxjs/toolkit';
-
 import { useDispatch } from 'react-redux';
 
 import { Button } from 'Components/Button/Button.styled';
 import { ContainerForm } from './ContactForm.styled';
 
-import { addContact } from '/src/redux/contactsSlice';
+import { addContact } from '../../redux/operations';
 
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -31,7 +28,7 @@ const ContactForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        dispatch(addContact({ id: nanoid(), name: values.name, number: values.number }));
+        dispatch(addContact({ name: values.name, number: values.number }));
         actions.resetForm();
       }}
       validationSchema={contactSchema}

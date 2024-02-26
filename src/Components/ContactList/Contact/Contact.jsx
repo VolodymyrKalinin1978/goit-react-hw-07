@@ -1,21 +1,17 @@
 import { Button } from 'Components/Button/Button.styled';
 import { ContainerLi, Person, Telefone } from './Contact.styled';
-import { deleteContact } from '../../../redux/contactsSlice';
+import { deleteContact } from '../../../redux/operations';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { selectVisibleContacts } from '../../../redux/selectors';
 
 const Contact = () => {
   const dispatch = useDispatch();
-  const contactList = useSelector(state => state.contacts.items);
-  const searchFilter = useSelector(state => state.filters.name);
-
-  const filteredContacts = contactList.filter(contactLists =>
-    contactLists.name.toLowerCase().includes(searchFilter.toLowerCase())
-  );
+  const filter = useSelector(selectVisibleContacts);
 
   return (
     <>
-      {filteredContacts.map(contactLists => (
+      {filter.map(contactLists => (
         <ContainerLi key={contactLists.id}>
           <div>
             <p>
